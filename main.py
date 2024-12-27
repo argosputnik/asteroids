@@ -1,23 +1,36 @@
 import pygame
 from constants import *
+from circleshape import *
+from player import *
 
+pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+clock = pygame.time.Clock()
+
 
 def main():
-    #print("Starting asteroids!")
-    #print("Screen width: " + str(SCREEN_WIDTH))
-    #print("Screen height: " +  str(SCREEN_HEIGHT))
+
+    player = Player(x=SCREEN_WIDTH / 2, y=SCREEN_HEIGHT / 2)
 
     run = True
-    while run == True:
-
+    while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return
+                run = False
 
 
-    # This should be at the same level as the function definition
+        screen.fill((0, 0, 0))  
+
+        
+        clock.tick(60)
+        dt = clock.get_time() / 1000
+
+        
+        player.draw(screen)
+
+        
+        pygame.display.flip()
+
+
 if __name__ == "__main__":
     main()
-
-

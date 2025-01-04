@@ -9,7 +9,7 @@ from shot import *
 from groups import asteroids, updateable, drawable, shots  # Updated import
 
 pygame.init()
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.FULLSCREEN)
 clock = pygame.time.Clock()
 
 def main():

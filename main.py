@@ -1,18 +1,20 @@
 import pygame
+import sys
 from constants import *
 from circleshape import *
 from player import *
 from asteroid import *
 from asteroidfield import *
-from groups import asteroids, updateable, drawable
+from shot import *
+from groups import asteroids, updateable, drawable, shots  # Updated import
 
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 
 def main():
-
-    AsteroidField.containers = (updateable,)  # Note: only updateable, not drawable
+    AsteroidField.containers = (updateable,)  # Fixed tuple syntax
+    Shot.containers = (updateable, drawable, shots)
     
     player = Player(x=SCREEN_WIDTH / 2, y=SCREEN_HEIGHT / 2)
     asteroid_field = AsteroidField()
@@ -39,7 +41,13 @@ def main():
         for players in drawable:
             players.draw(screen)        
 
-        
+        for asteroid in asteroids:
+            if player.collision(asteroid):
+                print ("Game Over", flush = True)
+                sys.exit()
+            
+
+
 
         
         pygame.display.flip()
